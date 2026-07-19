@@ -48,7 +48,7 @@ const CreateUserForm = () => {
 
       push("/");
     } else {
-      toast.success(msg);
+      toast.error(msg);
     }
   };
 
@@ -123,7 +123,7 @@ const CreateUserForm = () => {
             <FieldLabel htmlFor={field.name}>Gender</FieldLabel>
             <Select
               value={field.value}
-              onValueChange={field.onChange}>
+              onValueChange={(value) => field.onChange(value)}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select Your Gender" />
               </SelectTrigger>

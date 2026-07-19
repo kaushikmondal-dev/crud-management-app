@@ -1,7 +1,7 @@
-import z from "zod";
+import { z } from "zod";
 
 export const userFormSchema = z.object({
-  userIcon: z.url("Invalid Image url"),
+  userIcon: z.string().url("Invalid Image URL"),
   userName: z
     .string()
     .min(3, { error: "Full Name must be more than 3 characters long" })
@@ -16,7 +16,7 @@ export const userFormSchema = z.object({
   }),
 
   userPhNo: z.string().regex(/^\d{10}$/, {
-    error: "Phone Number must contain exactly 10 digits",
+    message: "Phone Number must contain exactly 10 digits",
   }),
 });
 

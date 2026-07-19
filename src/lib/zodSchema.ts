@@ -10,11 +10,9 @@ export const userFormSchema = z.object({
     .email({ error: "Invalid Email" })
     .max(64, { error: "Email maximum 64 characters long" }),
 
-  userGender: z
-    .string()
-    .refine((value) => ["Male", "Female", "Other"].includes(value), {
-      message: "Please select a gender",
-    }),
+  userGender: z.string().refine((value) => ["Male", "Female"].includes(value), {
+    message: "Please select a gender",
+  }),
 
   userPhNo: z.string().regex(/^\d{10}$/, {
     error: "Phone Number must contain exactly 10 digits",

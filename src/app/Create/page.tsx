@@ -1,4 +1,4 @@
-import CreateUserForm from "@/components/CreateUserForm";
+import CreateUserForm from "@/components/Forms/CreateUserForm";
 import {
   Card,
   CardContent,

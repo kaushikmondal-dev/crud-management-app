@@ -12,6 +12,7 @@ datasource db {
 }
 
 model UserTable {
+  userIcon   String
   userId     String @id @default(uuid())
   userName   String
   userEmail  String @unique

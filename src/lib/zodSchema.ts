@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const userFormSchema = z.object({
+  userIcon: z.url("Invalid Image url"),
   userName: z
     .string()
     .min(3, { error: "Full Name must be more than 3 characters long" })

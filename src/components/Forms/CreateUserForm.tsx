@@ -2,20 +2,25 @@
 
 import { userFormSchema, userFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon, UserPenIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
-import { Button } from "./shadcnui/button";
-import { Field, FieldError, FieldLabel } from "./shadcnui/field";
-import { Input } from "./shadcnui/input";
+import { Button } from "../shadcnui/button";
+import { Field, FieldError, FieldLabel } from "../shadcnui/field";
+import { Input } from "../shadcnui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./shadcnui/select";
+} from "../shadcnui/select";
 
 const CreateUserForm = () => {
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting },
+  } = useForm({
     resolver: zodResolver(userFormSchema),
     defaultValues: {
       userName: "",
@@ -27,6 +32,7 @@ const CreateUserForm = () => {
   });
 
   const createUserHandler = async (cuData: userFormType) => {
+    await new Promise((r) => setTimeout(r, 1000));
     console.log(cuData);
   };
 
@@ -35,6 +41,24 @@ const CreateUserForm = () => {
       onSubmit={handleSubmit(createUserHandler)}
       className="grid gap-4"
       noValidate>
+      <Controller
+        name="userIcon"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>User Icon</FieldLabel>
+            <Input
+              {...field}
+              id={field.name}
+              type="url"
+              aria-invalid={fieldState.invalid}
+              placeholder="Image url"
+              autoComplete=""
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
       <Controller
         name="userName"
         control={control}
@@ -81,7 +105,9 @@ const CreateUserForm = () => {
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor={field.name}>Gender</FieldLabel>
-            <Select>
+            <Select
+              value={field.value}
+              onValueChange={field.onChange}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select Your Gender" />
               </SelectTrigger>
@@ -115,7 +141,20 @@ const CreateUserForm = () => {
         )}
       />
 
-      <Button type="submit"></Button>
+      <Button
+        type="submit"
+        disabled={isSubmitting}>
+        {isSubmitting ?
+          <>
+            <LoaderIcon className="animate-spin" />
+            Submitting..
+          </>
+        : <>
+            <UserPenIcon />
+            Add User
+          </>
+        }
+      </Button>
     </form>
   );
 };

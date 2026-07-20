@@ -21,7 +21,9 @@ const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">{userData.userName}</CardTitle>
         <CardDescription className="text-lg">
-          {userData.userEmail}
+          <p>{userData.userEmail}</p>
+          <p>Gender: {userData.userGender}</p>
+          <p>Phone: +91 {userData.userPhNo}</p>
         </CardDescription>
       </CardHeader>
 

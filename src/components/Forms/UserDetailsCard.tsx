@@ -1,6 +1,8 @@
 import { UserTable } from "@generated/prisma/client";
 import { UserPenIcon } from "lucide-react";
-import { Button } from "../shadcnui/button";
+import { Route } from "next";
+import Link from "next/link";
+import { buttonVariants } from "../shadcnui/button";
 import {
   Card,
   CardDescription,
@@ -31,12 +33,13 @@ const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
 
       <CardFooter className="grid grid-cols-2 gap-8">
         <UserDeleteButton userId={userData.userId} />
-        <Button
-          type="button"
-          variant={"outline"}>
+
+        <Link
+          href={`/${userData.userId}` as Route}
+          className={buttonVariants({ variant: "outline", size: "sm" })}>
           <UserPenIcon />
           Edit
-        </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

@@ -30,7 +30,7 @@ const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
       <Separator />
 
       <CardFooter className="grid grid-cols-2 gap-8">
-        <UserDeleteButton />
+        <UserDeleteButton userId={userData.userId} />
         <Button
           type="button"
           variant={"outline"}>

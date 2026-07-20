@@ -1,33 +1,34 @@
 "use server";
 
 import prisma from "@/lib/database/dbClient";
-import { userFormType } from "@/lib/zodSchema";
 import { revalidatePath } from "next/cache";
 
-const createUser = async (cuData: userFormType) => {
+const deleteUser = async (userId: string) => {
   try {
-    await prisma.userTable.create({
-      data: cuData,
+    await prisma.userTable.delete({
+      where: {
+        userId,
+      },
     });
 
     revalidatePath("/");
 
     return {
       isSuccess: true,
-      msg: "User Add ✅",
+      msg: "User Deleted✅",
     };
   } catch (error) {
     if (error instanceof Error) {
       return {
         isSuccess: false,
-        msg: "Something want to Worng, try later ❌!!",
+        msg: "Something want to Worng, try again later ❌!!",
       };
     }
     return {
       isSuccess: false,
-      msg: "Server error: Creation failed 😒 ",
+      msg: "Server error: Delete failed 😒 ",
     };
   }
 };
 
-export default createUser;
+export default deleteUser;

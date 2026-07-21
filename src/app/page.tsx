@@ -16,7 +16,7 @@ const page = async () => {
       <section className="grid h-dvh place-items-center">
         <Card className="">
           <CardContent className="text-4xl">
-            No user in the database
+            No user in the database 💀
           </CardContent>
         </Card>
       </section>

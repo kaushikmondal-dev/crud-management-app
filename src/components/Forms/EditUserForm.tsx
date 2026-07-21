@@ -52,7 +52,6 @@ const EditUserForm = ({ uInfo }: EditUserFormProps) => {
       if (isSuccess) {
         toast.success(msg);
         reset();
-
         push("/");
       } else {
         toast.error(msg);

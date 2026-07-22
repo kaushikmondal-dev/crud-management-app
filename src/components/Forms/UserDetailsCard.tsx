@@ -19,8 +19,10 @@ type UserDetailsCardProps = {
 
 const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
   return (
-    <Card className="w-sm">
+    <Card className="w-sm grid " >
       <CardHeader className="text-center">
+        <img src={userData.userIcon} alt="userIcon" className="rounded-full object-cover w-[70px] h-[70px]" />
+
         <CardTitle className="text-2xl">{userData.userName}</CardTitle>
         <CardDescription className="text-lg">
           <p>{userData.userEmail}</p>

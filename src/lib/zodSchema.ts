@@ -15,7 +15,7 @@ export const userFormSchema = z.object({
     message: "Please select a gender",
   }),
 
-  userPhNo: z.string().regex(/^\d{10}$/, {
+  userPhNo: z.string().regex(/^\d{10}$/, {   //z.length use
     message: "Phone Number must contain exactly 10 digits",
   }),
 });

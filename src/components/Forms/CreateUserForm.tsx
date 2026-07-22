@@ -63,10 +63,12 @@ const CreateUserForm = () => {
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor={field.name}>User Icon</FieldLabel>
+            
             <Input
               {...field}
               id={field.name}
               type="url"
+              
               aria-invalid={fieldState.invalid}
               placeholder="Image url"
               autoComplete=""

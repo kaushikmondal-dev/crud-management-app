@@ -11,3 +11,18 @@ generator client {
 datasource db {
     provider = "sqlite"
 }
+
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
+
+model UserTable {
+    userId     String   @id @default(uuid())
+    userName   String
+    userEmail  String   @unique
+    userDob    DateTime
+    userGender Gender
+    userMob    String
+}

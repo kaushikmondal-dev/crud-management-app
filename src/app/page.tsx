@@ -1,20 +1,19 @@
+import UserDetailsCard from "@/components/UserDetailsCard";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Fullstack",
-  description: "Production grade Fullstack Next.js starter template",
+  title: "User Details | Basic CRUD",
+  description: "User Details  Page of Basic CRUD Application",
 };
 
 const page = () => {
   return (
-    <>
-      <section className="space-y-4 text-center">
-        <h1 className="text-5xl font-semibold">Next.js Starter Fullstack</h1>
-        <h2 className="text-3xl">
-          Production grade Fullstack Next.js starter template
-        </h2>
-      </section>
-    </>
+    <section className="grid grid-cols-1 place-items-center gap-8 pt-18 pb-4 md:grid-cols-2 lg:grid-cols-3">
+      <UserDetailsCard />
+      <UserDetailsCard />
+      <UserDetailsCard />
+      <UserDetailsCard />
+    </section>
   );
 };
 

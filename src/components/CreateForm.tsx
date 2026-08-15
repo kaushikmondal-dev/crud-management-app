@@ -2,6 +2,7 @@
 
 import { UserFormSchema, UserFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon, UserPlus2 } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "./shadcnui/button";
 import { Field, FieldError, FieldLabel } from "./shadcnui/field";
@@ -15,7 +16,11 @@ import {
 } from "./shadcnui/select";
 
 const CreateForm = () => {
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting },
+  } = useForm({
     resolver: zodResolver(UserFormSchema),
     defaultValues: {
       userName: "",
@@ -28,6 +33,7 @@ const CreateForm = () => {
   });
 
   const createUserHandler = async (uDATA: UserFormType) => {
+    await new Promise((r) => setTimeout(r, 1000));
     console.log(uDATA);
   };
 
@@ -133,7 +139,20 @@ const CreateForm = () => {
           </Field>
         )}
       />
-      <Button></Button>
+      <Button
+        type="submit"
+        disabled={isSubmitting}>
+        {isSubmitting ?
+          <>
+            <LoaderIcon className="animate-spin" />
+            Submitting.....
+          </>
+        : <>
+            <UserPlus2 />
+            Add User
+          </>
+        }
+      </Button>
     </form>
   );
 };

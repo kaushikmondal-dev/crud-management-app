@@ -1,8 +1,10 @@
 "use client";
 
 import { UserFormSchema, UserFormType } from "@/lib/zodSchema";
+import createUser from "@/server/createUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderIcon, UserPlus2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "./shadcnui/button";
 import { Field, FieldError, FieldLabel } from "./shadcnui/field";
@@ -14,12 +16,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./shadcnui/select";
+import { toast } from "./shadcnui/toast";
 
 const CreateForm = () => {
+  const { push } = useRouter();
   const {
     handleSubmit,
     control,
     formState: { isSubmitting },
+    reset,
   } = useForm({
     resolver: zodResolver(UserFormSchema),
     defaultValues: {
@@ -34,7 +39,15 @@ const CreateForm = () => {
 
   const createUserHandler = async (uDATA: UserFormType) => {
     await new Promise((r) => setTimeout(r, 1000));
-    console.log(uDATA);
+    const { isSuccess, msg } = await createUser(uDATA);
+
+    if (isSuccess) {
+      toast.add({ title: msg });
+      reset();
+      push("/");
+    } else {
+      toast.add({ title: msg });
+    }
   };
 
   return (

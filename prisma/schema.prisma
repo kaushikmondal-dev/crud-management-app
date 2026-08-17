@@ -19,10 +19,10 @@ enum Gender {
 }
 
 model UserTable {
-    userId     String   @id @default(uuid())
+    userId     String @id @default(uuid())
     userName   String
-    userEmail  String   @unique
-    userDob    DateTime
+    userEmail  String @unique
+    userDob    String
     userGender Gender
     userMob    String
 }

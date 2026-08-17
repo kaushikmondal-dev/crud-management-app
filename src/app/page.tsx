@@ -1,4 +1,5 @@
 import UserDetailsCard from "@/components/UserDetailsCard";
+import prisma from "@/lib/dbClient/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,13 +7,17 @@ export const metadata: Metadata = {
   description: "User Details  Page of Basic CRUD Application",
 };
 
-const page = () => {
+const page = async () => {
+  const allUsers = await prisma.userTable.findMany();
+
   return (
     <section className="grid grid-cols-1 place-items-center gap-8 pt-18 pb-4 md:grid-cols-2 lg:grid-cols-3">
-      <UserDetailsCard />
-      <UserDetailsCard />
-      <UserDetailsCard />
-      <UserDetailsCard />
+      {allUsers.map((item) => (
+        <UserDetailsCard
+          key={item.userId}
+          userData={item}
+        />
+      ))}
     </section>
   );
 };

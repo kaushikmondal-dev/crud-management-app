@@ -39,6 +39,7 @@ const CreateForm = () => {
 
   const createUserHandler = async (uDATA: UserFormType) => {
     await new Promise((r) => setTimeout(r, 1000));
+
     const { isSuccess, msg } = await createUser(uDATA);
 
     if (isSuccess) {

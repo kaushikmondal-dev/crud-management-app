@@ -1,5 +1,6 @@
 "use client";
 
+import { UserTable } from "@generated/prisma/client";
 import { UserPen } from "lucide-react";
 import { Button } from "./shadcnui/button";
 import {
@@ -11,16 +12,20 @@ import {
 } from "./shadcnui/card";
 import UserDeleteButton from "./UserDeleteButton";
 
-const UserDetailsCard = () => {
+type UserDetailsCardProps = {
+  userData: UserTable;
+};
+
+const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
   return (
     <Card className="w-sm">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">User Name</CardTitle>
+        <CardTitle className="text-2xl">{userData.userName}</CardTitle>
         <CardDescription className="flex flex-col items-center gap-1">
-          <span>useremail@gmail.com</span>
-          <span>userDOB</span>
-          <span>userGender</span>
-          <span>userMONO</span>
+          <span>{userData.userEmail}</span>
+          <span>{userData.userDob}</span>
+          <span>{userData.userGender}</span>
+          <span>{userData.userMob}</span>
         </CardDescription>
       </CardHeader>
       <CardFooter className="grid grid-cols-2 gap-5">

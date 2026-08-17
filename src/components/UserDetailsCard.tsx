@@ -29,7 +29,7 @@ const UserDetailsCard = ({ userData }: UserDetailsCardProps) => {
         </CardDescription>
       </CardHeader>
       <CardFooter className="grid grid-cols-2 gap-5">
-        <UserDeleteButton />
+        <UserDeleteButton userId={userData.userId} />
         <Button
           type="button"
           variant="outline">
